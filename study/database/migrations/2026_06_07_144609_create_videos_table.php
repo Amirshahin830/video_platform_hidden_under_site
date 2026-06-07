@@ -1,0 +1,29 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::create('videos', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->string('title');
+            $table->text('description')->nullable();
+            $table->string('file_path');
+            $table->string('thumbnail')->nullable();
+            $table->unsignedBigInteger('views')->default(0);
+            $table->unsignedSmallInteger('duration')->default(0)->comment('seconds');
+            $table->enum('status', ['draft', 'published'])->default('draft');
+            $table->timestamps();
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('videos');
+    }
+};
