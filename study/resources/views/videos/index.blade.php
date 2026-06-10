@@ -1,4 +1,4 @@
-<x-layout title="ویدئوها">
+<x-layout chat_roll=true pageTitle="Amir" logo="{{asset('/amhub.png')}}" title="ویدئوها">
     <div class="max-w-7xl mx-auto px-4 py-8">
 
         {{-- هدر --}}

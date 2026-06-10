@@ -1,53 +1,59 @@
-<x-layout title="{{ $video->title }}">
-
-
+<x-layout chat_roll=true pageTitle="Amir" logo="{{asset('/amhub.png')}}" title="{{ $video->title }}">
 
     <div class="max-w-6xl mx-auto px-4 py-8">
         <div class="flex flex-col lg:flex-row gap-6">
-
+            <script src="/vendor/videojs/video.js"></script>
             {{-- ستون اصلی --}}
             <div class="flex-1 min-w-0 flex flex-col gap-4">
 
-                {{-- پلیر ویدئو --}}
-
-                <video id="player" controls class="w-full h-full object-cover">
-                    @if($video->processing_status === 'done' && $video->path_360p)
-                        <source src="{{ asset('storage/' . $video->path_360p) }}" type="video/mp4">
-                    @else
-                        <source src="{{ asset('storage/' . $video->file_path) }}" type="video/mp4">
-                    @endif
-                </video>
-
-                @if($video->processing_status === 'done' && $video->path_original)
-                    <div class="flex gap-2 mt-2">
-                        <button onclick="changeQuality('{{ asset('storage/' . $video->path_360p) }}', this)"
-                                class="btn btn-sm btn-primary" data-quality="360p">360p</button>
-                        <button onclick="changeQuality('{{ asset('storage/' . $video->path_original) }}', this)"
-                                class="btn btn-sm btn-ghost" data-quality="original">کیفیت اصلی</button>
-                    </div>
-                @endif
+                <div class="relative w-full aspect-video bg-black">
+                    <video id="player" playsinline controls>
+                        <source src="{{ asset('storage/' . $video->file_path) }}" type="video/mp4" />
+                    </video>
+                </div>
 
                 <script>
-                    document.addEventListener('DOMContentLoaded', function(){
-                        const player = new Plyr('#player', {
-                            controls: ['play-large','play','progress','current-time','duration','mute','volume','settings','fullscreen'],
-                            settings: ['speed'],
-                            speed: { selected: 1, options: [0.5, 0.75, 1, 1.25, 1.5, 2] },
-                        });
-
-                        window.changeQuality = function(src, btn) {
-                            const vid = document.getElementById('player');
-                            const currentTime = vid.currentTime;
-                            const wasPaused = vid.paused;
-                            vid.src = src;
-                            vid.load();
-                            vid.currentTime = currentTime;
-                            if (!wasPaused) vid.play();
-                            document.querySelectorAll('[data-quality]').forEach(b => b.classList.replace('btn-primary', 'btn-ghost'));
-                            btn.classList.replace('btn-ghost', 'btn-primary');
-                        }
+                    document.addEventListener("DOMContentLoaded", () => {
+                        new Plyr("#player");
                     });
+
                 </script>
+
+{{--                <script>--}}
+{{--                    function initPlyr() {--}}
+{{--                        if (typeof Plyr === 'undefined') {--}}
+{{--                            setTimeout(initPlyr, 100);--}}
+{{--                            return;--}}
+{{--                        }--}}
+
+{{--                        const player = new Plyr('#player', {--}}
+{{--                            controls: ['play-large', 'play', 'progress', 'current-time', 'duration', 'mute', 'volume', 'settings', 'fullscreen'],--}}
+{{--                            settings: ['speed'],--}}
+{{--                            speed: { selected: 1, options: [0.5, 0.75, 1, 1.25, 1.5, 2] },--}}
+{{--                        });--}}
+
+{{--                        window.changeQuality = function (src, btn) {--}}
+{{--                            const currentTime = player.currentTime;--}}
+{{--                            const wasPlaying  = !player.paused;--}}
+
+{{--                            player.source = {--}}
+{{--                                type: 'video',--}}
+{{--                                sources: [{ src: src, type: 'video/mp4' }],--}}
+{{--                            };--}}
+
+{{--                            player.once('ready', () => {--}}
+{{--                                player.currentTime = currentTime;--}}
+{{--                                if (wasPlaying) player.play();--}}
+{{--                            });--}}
+
+{{--                            document.querySelectorAll('[data-quality]').forEach(b => b.classList.replace('btn-primary', 'btn-ghost'));--}}
+{{--                            btn.classList.replace('btn-ghost', 'btn-primary');--}}
+{{--                        };--}}
+{{--                    }--}}
+
+{{--                    initPlyr();--}}
+{{--                </script>--}}
+
 
                 {{-- عنوان و اطلاعات --}}
                 <div class="flex flex-col gap-3">

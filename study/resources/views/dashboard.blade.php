@@ -1,4 +1,4 @@
-<x-layout title="داشبورد">
+<x-layout pageTitle="صفحه اصلی" title="داشبورد">
     <div class="max-w-4xl mx-auto px-4 py-8 flex flex-col gap-6">
 
         @if(session('success'))

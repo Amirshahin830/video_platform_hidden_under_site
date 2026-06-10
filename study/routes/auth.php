@@ -14,6 +14,9 @@ Route::view('/register','auth.register')
     ->middleware('guest')
     ->name('register');
 
+
+Route::get('/avatar/generate', [RegisteredUserController::class, 'generate'])->name('avatar.generate');
+
 Route::post('/register', [RegisteredUserController::class, 'store'])
     ->middleware('guest');
 

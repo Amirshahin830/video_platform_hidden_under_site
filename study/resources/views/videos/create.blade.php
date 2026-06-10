@@ -1,4 +1,4 @@
-<x-layout title="آپلود ویدئو">
+<x-layout pageTitle="Amir" logo="{{asset('/amhub.png')}}" title="آپلود ویدئو">
     <div class="max-w-2xl mx-auto px-4 py-8">
 
         <div class="flex items-center gap-3 mb-6">

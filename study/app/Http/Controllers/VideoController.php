@@ -30,7 +30,6 @@ class VideoController extends Controller
 
     public function show(Video $video)
     {
-        if(Auth::user()->hasRole('viewer') || Auth::user()->hasRole('admin')) {
             $video->increment('views');
 
             $video->loadCount(['likesOnly', 'dislikes']);
@@ -52,23 +51,15 @@ class VideoController extends Controller
                 ->get();
 
             return view('videos.show', compact('video', 'userLike', 'related'));
-        }
-        else
-            return view('home');
     }
 
     public function create()
     {
-        if(Auth::user()->hasRole('viewer') || Auth::user()->hasRole('admin')) {
             return view('videos.create');
-        }
-        else
-            return view('home');
     }
 
     public function store(Request $request)
     {
-        if(Auth::user()->hasRole('viewer') || Auth::user()->hasRole('admin')) {
             $request->validate([
                 'title' => ['required', 'string', 'max:255'],
                 'description' => ['nullable', 'string'],
@@ -115,14 +106,10 @@ class VideoController extends Controller
             ProcessVideoQualities::dispatch($video);
 
             return redirect()->route('home')->with('success', 'ویدئو با موفقیت آپلود شد.');
-        }
-        else
-            return view('home');
     }
 
     public function like(Request $request, Video $video)
     {
-        if(Auth::user()->hasRole('viewer') || Auth::user()->hasRole('admin')) {
             $request->validate([
                 'type' => ['required', 'in:like,dislike'],
             ]);
@@ -145,15 +132,10 @@ class VideoController extends Controller
             }
 
             return back();
-        }
-        else
-            return view('home');
     }
 
     public function destroy(Video $video)
     {
-        if(Auth::user()->hasRole('viewer') || Auth::user()->hasRole('admin')) {
-
             if ($video->user_id !== auth()->id() && !auth()->user()->hasRole('admin')) {
                 abort(403);
             }
@@ -166,8 +148,5 @@ class VideoController extends Controller
             $video->delete();
 
             return redirect()->route('home')->with('success', 'ویدئو حذف شد.');
-        }
-        else
-            return view('home');
     }
 }

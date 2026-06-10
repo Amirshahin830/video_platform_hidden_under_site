@@ -19,6 +19,7 @@ return Application::configure(basePath: dirname(__DIR__))
 
         $middleware->alias([
             'admin'        => \App\Http\Middleware\AdminMiddleware::class,
+            'licensed'     => \App\Http\Middleware\LicensedMiddleware::class,
             'rate_limiter' => \App\Http\Middleware\Ratelimiter::class,
             'verified'     => \App\Http\Middleware\EnsureEmailIsVerified::class,
         ]);

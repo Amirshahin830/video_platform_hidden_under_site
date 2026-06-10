@@ -68,4 +68,18 @@ class User extends Authenticatable
     {
         return $this->hasMany(Like::class);
     }
+
+    // app/Models/User.php — اضافه کن
+    public function conversations()
+    {
+        return $this->belongsToMany(Conversation::class)
+            ->withPivot('last_read_at')
+            ->withTimestamps();
+    }
+
+// آنلاین بودن (5 دقیقه اخیر)
+    public function isOnline(): bool
+    {
+        return Cache::has('user-online-' . $this->id);
+    }
 }

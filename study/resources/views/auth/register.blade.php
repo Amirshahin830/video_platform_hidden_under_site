@@ -6,19 +6,18 @@
     <div class="hero min-h-[calc(100vh-16rem)]">
         <div class="hero-content flex-col">
             <div class="card w-96 bg-base-100">
-                <div class="card-body">
-                    <h1 class="text-3xl font-bold text-center mb-6">ساخت حساب کابری</h1>
-
+                <div class="card-body gap-6">
+                    <h1 class="text-3xl font-bold text-center mb-6  gap-6">ساخت حساب کاربری</h1>
                     <form novalidate method="POST" action="/register">
                         @csrf
 
                         <!-- Name -->
-                        <label class="floating-label mb-6">
+                        <label class="floating-label mb-6 w-full flex">
                             <input type="text"
                                    name="name"
                                    placeholder="نام و نام خانوادگی"
                                    value="{{ old('name') }}"
-                                   class="input input-bordered @error('name') input-error @enderror"
+                                   class="input input-bordered w-full @error('name') input-error @enderror"
                                    required>
                             <span>Name</span>
                         </label>
@@ -29,12 +28,12 @@
                         @enderror
 
                         <!-- Email -->
-                        <label class="floating-label mb-6">
+                        <label class="floating-label mb-6 w-full flex">
                             <input type="email"
                                    name="email"
                                    placeholder="ایمیل"
                                    value="{{ old('email') }}"
-                                   class="input input-bordered @error('email') input-error @enderror"
+                                   class="input input-bordered w-full @error('email') input-error @enderror"
                                    required>
                             <span>Email</span>
                         </label>
@@ -45,11 +44,11 @@
                         @enderror
 
                         <!-- Password -->
-                        <label class="floating-label mb-6">
+                        <label class="floating-label mb-6 w-full flex">
                             <input type="password"
                                    name="password"
                                    placeholder="پسورد"
-                                   class="input input-bordered @error('password') input-error @enderror"
+                                   class="input input-bordered w-full @error('password') input-error @enderror"
                                    required>
                             <span>Password</span>
                         </label>
@@ -60,11 +59,11 @@
                         @enderror
 
                         <!-- Password Confirmation -->
-                        <label class="floating-label mb-6">
+                        <label class="floating-label mb-6 w-full flex">
                             <input type="password"
                                    name="password_confirmation"
                                    placeholder="تکرار پسورد"
-                                   class="input input-bordered"
+                                   class="input input-bordered w-full"
                                    required>
                             <span>Confirm Password</span>
                         </label>

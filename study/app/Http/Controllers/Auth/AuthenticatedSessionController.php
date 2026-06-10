@@ -33,7 +33,7 @@ class AuthenticatedSessionController extends Controller
 
         // If login fails, redirect back with error
         return back()
-            ->withErrors(['email' => 'The provided credentials do not match our records.'])
+            ->withErrors(['email' => 'اطلاعاتی که وارد کرده اید اشتباه است '])
             ->onlyInput('email');
     }
 

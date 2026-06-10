@@ -6,19 +6,19 @@
     <div class="hero min-h-[calc(100vh-16rem)]">
         <div class="hero-content flex-col">
             <div class="card w-96 bg-base-100">
-                <div class="card-body">
-                    <h1 class="text-3xl font-bold text-center mb-6">ورود کاربر</h1>
+                <div class="card-body gap-6">
 
+                    <h1 class="text-3xl font-bold text-center mb-6  gap-6">ورود کاربر</h1>
                     <form novalidate method="POST" action="/login">
                         @csrf
 
                         <!-- Email -->
-                        <label class="floating-label mb-6">
+                        <label class="floating-label mb-6 w-full flex">
                             <input type="email"
                                    name="email"
                                    placeholder="ایمیل"
                                    value="{{ old('email') }}"
-                                   class="input input-bordered @error('email') input-error @enderror"
+                                   class="input input-bordered w-full @error('email') input-error @enderror"
                                    required
                                    autofocus>
                             <span>Email</span>
@@ -30,11 +30,11 @@
                         @enderror
 
                         <!-- Password -->
-                        <label class="floating-label mb-6">
+                        <label class="floating-label mb-6 w-full flex">
                             <input type="password"
                                    name="password"
                                    placeholder="پسورد"
-                                   class="input input-bordered @error('password') input-error @enderror"
+                                   class="input input-bordered w-full @error('password') input-error @enderror"
                                    required>
                             <span>Password</span>
                         </label>
